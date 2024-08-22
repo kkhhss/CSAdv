@@ -5,7 +5,56 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CSAdv
+
 {
+    struct Point
+    {
+        public int x;
+        public int y;
+        public string testA;
+        public string testB;
+
+        // 구조체-> 기본생성자 사용X
+        // 구조체 생성자 -> 변수가 모두 초기화 되어야 함!
+
+        public Point(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+            testA = null;
+            testB = "init";
+        }
+        public Point(int x, int y, string test)
+        {
+            this.x = x;
+            this.y = y;
+            testA = null;
+            testB = test;
+        }
+    }
+
+    class PointClass
+    {
+        public int x;
+        public int y;
+        public PointClass(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    struct PointStruct
+    {
+        public int x;
+        public int y;
+        public PointStruct(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
     class Wanted<U>
     {
         public U Value;
@@ -75,6 +124,22 @@ namespace CSAdv
             Console.WriteLine("현재 좌표: (" + x + ", " + y + ")");
             NextPosition(x, y, vx, vy, out x, out y);
             Console.WriteLine("현재 좌표: (" + x + ", " + y + ")");
+
+            PointClass pCA = new PointClass(10, 20);
+            PointClass pCB = pCA; // 참조 복사. pCA와 pCB는 동일 객체를 바라본다.
+            pCB.x = 100;
+            pCB.y = 100;
+            Console.WriteLine("pCA: {0}, {1}", pCA.x, pCA.y); // pCA: 100, 100
+            Console.WriteLine("pCB: {0}, {1}", pCB.x, pCB.y); // pCB: 100, 100
+            Console.WriteLine();
+
+            PointStruct pSA = new PointStruct(10, 20);
+            PointStruct pSB = pSA; // 값 복사, pSA와 pSB는 별개의 변수.
+            pCB.x = 100;
+            pCB.y = 100;
+            Console.WriteLine("pCA: {0}, {1}", pSA.x, pSA.y); // pSA: 10, 20
+            Console.WriteLine("pCB: {0}, {1}", pSB.x, pSB.y); // pSB: 100, 200
+            Console.WriteLine();
         }
 
     }
